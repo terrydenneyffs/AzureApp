@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
         const db = client.db(dbName)
         return db.collection('books').find().toArray()
       })
-      .then(response => res.json(response))
+      .then(books => res.render('index', { books }))
   } catch (err) {
     console.log(err)
   }

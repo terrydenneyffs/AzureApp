@@ -65,7 +65,7 @@ router.get('/', function(req, res, next) {
     return MongoClient.connect(url, { auth: { user, password } })
       .then((client) => {
         const db = client.db(dbName)
-        return db.collection('books').find()
+        return db.collection('books').insertMany(books)
       })
       .then(response => res.json(response))
   } catch (err) {
