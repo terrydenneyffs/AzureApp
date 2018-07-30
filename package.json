@@ -3,15 +3,24 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "nodemon ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "^1.4.3",
     "express": "^4.16.3",
     "http-errors": "^1.7.0",
     "jade": "^1.11.0",
+    "mongodb": "^3.1.1",
     "morgan": "^1.9.0",
+    "nodemon": "^1.18.3",
     "path": "^0.12.7",
     "source-map": "^0.7.3"
+  },
+  "nodemonConfig": {
+    "env": {
+      "URL": "mongodb://terry-test-database.documents.azure.com:10255/?ssl=true&replicaSet=globaldb",
+      "USER": "terry-test-database",
+      "PASSWORD": "iBdo3GddxqRHyzvL2uuEnToUX0UCfZnUX4xQY8AekUhDcS7NWJ47YaLDAd1KNuV1edBA1j7i2xfOnxuAnc8fPQ=="
+    }
   }
 }
