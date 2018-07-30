@@ -61,17 +61,16 @@ router.get('/', function(req, res, next) {
   const user = process.env.USER
   const dbName = 'library';
 
-  (async function mongo() {
-    let client;
-    try {
-      client = await MongoClient.connect(url, { auth: { user, password } });
-      const db = client.db(dbName)
-      const response = await db.collection('books').insertMany(books);
-      res.json(response);
-    } catch (err) {
-      console.log(err)
-    }
-  }())
+  try {
+    return MongoClient.connect(url, { auth: { user, password } })
+      .then((client) => {
+        const db = client.db(dbName)
+        return db.collection('books').find()
+      })
+      .then(response => res.json(response))
+  } catch (err) {
+    console.log(err)
+  }
 });
 
 module.exports = router;
