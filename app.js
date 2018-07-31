@@ -3,6 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var appInsights = require('applicationinsights')
+
+appInsights.setup('5edaa5d4-6717-4631-ae1d-c694c448b05e').start();
+
+let client = appInsights.defaultClient;
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -14,6 +19,10 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use((req, res, next) => {
+  client.trackNodeHttpRequest({ request: req, response: res });
+  next();
+})
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
